@@ -38,7 +38,7 @@ def plot_data(dataframes):
     plt.ylabel("Force")
     plt.grid(False)
     #plt.ylim(df['data'].min(), df['data'].max())
-    plt.ylim(-35, -10)
+    plt.ylim(-50, 0)
   plt.show()
 
 def parse_data(filename):
@@ -73,7 +73,7 @@ def parse_data(filename):
       df = pd.DataFrame(data_lines, columns=['index','data'])  # Set a generic column name
       df['timestamp'] = df['index']/freq
       window = freq
-      df['ave_data'] = moving_average(df['data'], 3)
+      df['ave_data'] = moving_average(df['data'], 1)
       df.attrs = {'Kp': Kp, 'Ki': Ki, 'Kd': Kd, 'alpha': alpha, 'freq': freq}
       print(df.attrs)
       dataframes.append(df)
@@ -82,7 +82,7 @@ def parse_data(filename):
 
 
 # Parse the data
-dataframes = parse_data("Data\PIDSandingLog.txt")
+dataframes = parse_data("Data\PIDLog.txt")
 
 # Print the dataframes
 for i, df in enumerate(dataframes):
